@@ -1,16 +1,17 @@
 /* Sidebar Styles (for large screens) */
 .sidebar {
   width: 250px; /* Ensure sidebar takes a fixed width */
-  background-color: #333;
-  color: white;
+  background-color: #fff;
+  color: #575757;
   padding-top: 20px;
   position: fixed;
   top: 0;
   left: 0; /* Ensure it stays visible */
   height: 100%;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Adjust main content for large screens */
@@ -28,6 +29,7 @@
 .sidebar nav ul {
   list-style: none;
   padding: 0;
+  margin-top: 70px;
   flex-grow: 1; /* Take remaining space */
 }
 
@@ -36,7 +38,7 @@
 }
 
 .sidebar nav ul li a {
-  color: white;
+  color: #575757;
   text-decoration: none;
   padding: 12px 20px;
   display: block;
@@ -45,7 +47,9 @@
 }
 
 .sidebar nav ul li a:hover {
-  background-color: #575757;
+  color: #000;
+  border-left: 5px solid #e8b40a;
+  background: white;
 }
 
 /* Username and Logout Button at the Bottom */
@@ -95,6 +99,7 @@
   background-position: center;
   top: 0;
   z-index: 1000;
+  /* position: fixed; */
 }
 
 .header h1 {
@@ -145,20 +150,22 @@
   padding: 20px;
   background-color: #f4f4f4;
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   /* Hide sidebar by default on small screens */
   .sidebar {
-    left: -250px; /* Sidebar is hidden initially on mobile */
+    transform: translateX(-100%); /* Sidebar is hidden initially on mobile */
   }
 
   .sidebar.open {
-    left: 0; /* Show sidebar when open on mobile */
+    transform: translateX(0); /* Show sidebar when open on mobile */
   }
 
   .hamburger-menu {
+    cursor: pointer;
     display: block; /* Show hamburger icon on mobile */
   }
 
@@ -174,7 +181,9 @@
   .content {
     margin-left: 0; /* Remove sidebar space on small screens */
   }
-
+  .sidebar nav ul {
+    margin-top: 40px;
+  }
   /* Adjust sidebar footer for mobile */
   .sidebar-footer {
     display: block;

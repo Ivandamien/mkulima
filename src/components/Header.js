@@ -140,16 +140,160 @@
 // };
 
 // export default Header;
+// import { useState } from "react";
+// import { GiHamburgerMenu } from "react-icons/gi";
+// import { IoMdClose } from "react-icons/io";
+// import { MdLogout } from "react-icons/md";
+// import Modal from "./Modal"; // Modal component
+// // import "./Header.css"; // Ensure styles for header
+
+// const Header = ({ toggleSidebar, isSidebarOpen }) => {
+//   const username = localStorage.getItem("username");
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+
+//   // Handle logout functionality
+//   const handleLogout = () => {
+//     localStorage.removeItem("username");
+//     localStorage.removeItem("accessToken");
+//     window.location.href = "/"; // Redirect to login page
+//   };
+
+//   return (
+//     <div className="header">
+//       <h1>Inua Mkulima Subsidy Program</h1>
+//       <div className="header-right">
+//         <p className="header-username">
+//           Logged in as:{" "}
+//           <strong>
+//             <span className="username">{username}</span>
+//           </strong>
+//         </p>
+//         <button
+//           className="logout-button"
+//           onClick={() => setIsModalOpen(true)} // Open the modal
+//         >
+//           <span>
+//             <MdLogout size={24} />
+//           </span>
+//           Logout
+//         </button>
+//       </div>
+
+//       {/* Hamburger Menu Button */}
+//       <div className="hamburger-menu" onClick={toggleSidebar}>
+//         {isSidebarOpen ? (
+//           <IoMdClose size={30} color="white" />
+//         ) : (
+//           <GiHamburgerMenu size={30} color="white" />
+//         )}
+//       </div>
+
+//       {/* Logout Modal */}
+//       <Modal
+//         isOpen={isModalOpen}
+//         onClose={() => setIsModalOpen(false)} // Close the modal
+//         onConfirm={() => {
+//           handleLogout(); // Perform logout
+//           setIsModalOpen(false); // Close the modal
+//         }}
+//       />
+//     </div>
+//   );
+// };
+
+// export default Header;
+
+// import { useState } from "react";
+// import { GiHamburgerMenu } from "react-icons/gi";
+// import { IoMdClose } from "react-icons/io";
+// import { MdLogout } from "react-icons/md";
+// import Sidebar from "./Sidebar"; // Import Sidebar component
+// import Modal from "./Modal"; // Import Modal component
+
+// const Header = () => {
+//   const username = localStorage.getItem("username");
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+
+//   // Handle sidebar toggle
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   // Handle logout functionality
+//   const handleLogout = () => {
+//     localStorage.removeItem("username");
+//     localStorage.removeItem("accessToken");
+//     window.location.href = "/"; // Redirect to login page
+//   };
+
+//   return (
+//     <>
+//       {/* Sidebar Component */}
+//       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+//       {/* Header Component */}
+//       <div className="header">
+//         <h1>Inua Mkulima Subsidy Program</h1>
+//         <div className="header-right">
+//           <p className="header-username">
+//             Logged in as:{" "}
+//             <strong>
+//               <span className="username">{username}</span>
+//             </strong>
+//           </p>
+//           <button
+//             className="logout-button"
+//             onClick={() => setIsModalOpen(true)} // Open the logout confirmation modal
+//           >
+//             <span>
+//               <MdLogout size={24} />
+//             </span>
+//             Logout
+//           </button>
+//         </div>
+
+//         {/* Hamburger Menu Button (Visible on small screens) */}
+//         <div className="hamburger-menu" onClick={toggleSidebar}>
+//           {isSidebarOpen ? (
+//             <IoMdClose size={30} color="white" />
+//           ) : (
+//             <GiHamburgerMenu size={30} color="white" />
+//           )}
+//         </div>
+//       </div>
+
+//       {/* Logout Confirmation Modal */}
+//       <Modal
+//         isOpen={isModalOpen}
+//         onClose={() => setIsModalOpen(false)} // Close the modal
+//         onConfirm={() => {
+//           handleLogout(); // Perform logout
+//           setIsModalOpen(false); // Close the modal
+//         }}
+//       />
+//     </>
+//   );
+// };
+
+// export default Header;
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
-import Modal from "./Modal"; // Modal component
+import Sidebar from "./Sidebar"; // Import Sidebar component
+import Modal from "./Modal"; // Import Modal component
 // import "./Header.css"; // Ensure styles for header
 
-const Header = ({ toggleSidebar, isSidebarOpen }) => {
+const Header = () => {
   const username = localStorage.getItem("username");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handle sidebar toggle
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   // Handle logout functionality
   const handleLogout = () => {
@@ -159,36 +303,46 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
   };
 
   return (
-    <div className="header">
-      <h1>Inua Mkulima Subsidy Program</h1>
-      <div className="header-right">
-        <p className="header-username">
-          Logged in as:{" "}
-          <strong>
-            <span className="username">{username}</span>
-          </strong>
-        </p>
-        <button
-          className="logout-button"
-          onClick={() => setIsModalOpen(true)} // Open the modal
-        >
-          <span>
-            <MdLogout size={24} />
-          </span>
-          Logout
-        </button>
+    <>
+      {/* Sidebar Component */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        username={username}
+      />
+
+      {/* Header Component */}
+      <div className="header">
+        <h1>Inua Mkulima Subsidy Program</h1>
+        <div className="header-right">
+          <p className="header-username">
+            Logged in as:{" "}
+            <strong>
+              <span className="username">{username}</span>
+            </strong>
+          </p>
+          <button
+            className="logout-button"
+            onClick={() => setIsModalOpen(true)} // Open the logout confirmation modal
+          >
+            <span>
+              <MdLogout size={24} />
+            </span>
+            Logout
+          </button>
+        </div>
+
+        {/* Hamburger Menu Button (Visible on small screens) */}
+        <div className="hamburger-menu" onClick={toggleSidebar}>
+          {isSidebarOpen ? (
+            <IoMdClose size={30} color="white" />
+          ) : (
+            <GiHamburgerMenu size={30} color="white" />
+          )}
+        </div>
       </div>
 
-      {/* Hamburger Menu Button */}
-      <div className="hamburger-menu" onClick={toggleSidebar}>
-        {isSidebarOpen ? (
-          <IoMdClose size={30} color="white" />
-        ) : (
-          <GiHamburgerMenu size={30} color="white" />
-        )}
-      </div>
-
-      {/* Logout Modal */}
+      {/* Logout Confirmation Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)} // Close the modal
@@ -197,7 +351,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
           setIsModalOpen(false); // Close the modal
         }}
       />
-    </div>
+    </>
   );
 };
 
