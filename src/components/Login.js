@@ -49,6 +49,12 @@ const LoginPage = () => {
       </div>
       <div className="login-right">
         <div className="login-box">
+          <div className="image-overlay">
+            <img
+              src="/assets/green-leaves-white-background.png"
+              alt="Overlay"
+            />
+          </div>
           <h2>Welcome to</h2>
           <h1>Inua Mkulima - Subsidy Program</h1>
           <p>Enter your username to continue</p>
