@@ -1,36 +1,25 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi"; // Hamburger icon for opening
-import { IoMdClose } from "react-icons/io"; // Close icon for closing
+import { Routes, Route, Link } from "react-router-dom";
+import Header from "../components/Header";
 import "./Dashboard.css";
 import "./Sidebar.css"; // Sidebar specific styles
 
 // Import your pages (components)
 import Transactions from "./Transactions";
 import Reports from "./Report";
-import Header from "../components/Header";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Handle sidebar toggle
+  // Toggle Sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Add a basic logout function
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear the stored token
-    window.location.href = "/"; // Redirect to the login page
-  };
-
-  // Get username from localStorage (or you can pass it through state)
-  const username = localStorage.getItem("username") || "Guest";
-
   return (
     <div className="dashboard-container">
-      {/* Header with Background Image */}
-      <Header />
+      {/* Header */}
+      <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
       <div className="main-content">
         {/* Sidebar */}
@@ -59,7 +48,7 @@ const Dashboard = () => {
           </nav>
         </aside>
 
-        {/* Main Content (where nested routes are displayed) */}
+        {/* Main Content */}
         <main className="content">
           <Routes>
             <Route index element={<h2>Welcome to the Dashboard</h2>} />
