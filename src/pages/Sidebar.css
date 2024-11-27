@@ -46,7 +46,8 @@
   transition: background-color 0.3s;
 }
 
-.sidebar nav ul li a:hover {
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
   color: #000;
   border-left: 5px solid #e8b40a;
   background: white;
@@ -57,6 +58,7 @@
   padding: 20px;
   background-color: #444;
   margin-top: auto; /* Push footer to the bottom */
+  display: none;
 }
 
 .sidebar-footer p {
@@ -182,7 +184,7 @@
     margin-left: 0; /* Remove sidebar space on small screens */
   }
   .sidebar nav ul {
-    margin-top: 40px;
+    margin-top: 100px;
   }
   /* Adjust sidebar footer for mobile */
   .sidebar-footer {

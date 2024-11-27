@@ -1,23 +1,45 @@
 import React from "react";
 import { MdLogout } from "react-icons/md";
-// Sidebar styles
+import { NavLink } from "react-router-dom"; // Use NavLink for active link styling
 
 const Sidebar = ({ isOpen, toggleSidebar, username }) => {
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
       <nav>
         <ul>
+          {/* Only highlight the Dashboard link when exactly on /dashboard */}
           <li>
-            <a href="/dashboard">Dashboard</a>
+            <NavLink
+              to="/dashboard"
+              end // Ensure it matches exactly
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Dashboard
+            </NavLink>
           </li>
           <li>
-            <a href="/profile">Profile</a>
+            <NavLink
+              to="/dashboard/reports"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Report
+            </NavLink>
           </li>
           <li>
-            <a href="/settings">Settings</a>
+            <NavLink
+              to="/dashboard/transactions"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Transactions
+            </NavLink>
           </li>
           <li>
-            <a href="/help">Help</a>
+            <NavLink
+              to="/help"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Help
+            </NavLink>
           </li>
         </ul>
       </nav>

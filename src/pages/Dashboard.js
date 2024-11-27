@@ -1,61 +1,48 @@
 import React, { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
+import Sidebar from "../components/Sidebar"; // Ensure Sidebar is imported
 import "./Dashboard.css";
 import "./Sidebar.css"; // Sidebar specific styles
 
 // Import your pages (components)
 import Transactions from "./Transactions";
 import Reports from "./Report";
+import DashboardDetail from "../components/DashboardDetail";
 
 const Dashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const username = localStorage.getItem("username");
 
-  // Toggle Sidebar
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  // Set state for sidebar visibility
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
-      <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      {/* Header with sidebar toggle */}
+      <Header
+        username={username}
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
 
-      <div className="main-content">
-        {/* Sidebar */}
-        <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/dashboard" onClick={() => setIsSidebarOpen(false)}>
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/transactions"
-                  onClick={() => setIsSidebarOpen(false)}
-                >
-                  Transactions
-                </Link>
-              </li>
-              <li>
-                <Link to="/reports" onClick={() => setIsSidebarOpen(false)}>
-                  Reports
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </aside>
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} // Toggle sidebar visibility
+        username={username}
+      />
 
-        {/* Main Content */}
-        <main className="content">
-          <Routes>
-            <Route index element={<h2>Welcome to the Dashboard</h2>} />
-            <Route path="transactions" element={<Transactions />} />
-            <Route path="reports" element={<Reports />} />
-          </Routes>
-        </main>
+      <div
+        className={`dashboard-content ${isSidebarOpen ? "sidebar-open" : ""}`}
+      >
+        {/* Define routes and render content dynamically */}
+        <Routes>
+          {/* Default Dashboard route */}
+          <Route index element={<DashboardDetail />} />{" "}
+          {/* Render dashboard content by default */}
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="reports" element={<Reports />} />
+        </Routes>
       </div>
     </div>
   );
