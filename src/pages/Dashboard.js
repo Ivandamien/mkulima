@@ -8,6 +8,7 @@ import "./Sidebar.css"; // Sidebar specific styles
 // Import your pages (components)
 import Transactions from "./Transactions";
 import Reports from "./Report";
+import Header from "../components/Header";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,31 +30,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {/* Header with Background Image */}
-      <header className="header">
-        <div className="header-content">
-          <div className="header-left">
-            <h1>Inua Mkulima Subsidy Program</h1>
-          </div>
-          {/* On small screens, only show hamburger icon */}
-          <div className="header-right">
-            <p className="header-username">
-              Logged in as: <strong>{username}</strong>
-            </p>
-            <button className="logout-button" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        </div>
-
-        {/* Hamburger Menu Button (Right side of the header) */}
-        <div className="hamburger-menu" onClick={toggleSidebar}>
-          {isSidebarOpen ? (
-            <IoMdClose size={30} color="white" />
-          ) : (
-            <GiHamburgerMenu size={30} color="white" />
-          )}
-        </div>
-      </header>
+      <Header />
 
       <div className="main-content">
         {/* Sidebar */}
@@ -61,32 +38,25 @@ const Dashboard = () => {
           <nav>
             <ul>
               <li>
-                <Link to="dashboard" onClick={() => setIsSidebarOpen(false)}>
+                <Link to="/dashboard" onClick={() => setIsSidebarOpen(false)}>
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="transactions" onClick={() => setIsSidebarOpen(false)}>
+                <Link
+                  to="/transactions"
+                  onClick={() => setIsSidebarOpen(false)}
+                >
                   Transactions
                 </Link>
               </li>
               <li>
-                <Link to="reports" onClick={() => setIsSidebarOpen(false)}>
+                <Link to="/reports" onClick={() => setIsSidebarOpen(false)}>
                   Reports
                 </Link>
               </li>
             </ul>
           </nav>
-
-          {/* Username and Logout Button at the Bottom on Mobile */}
-          <div className="sidebar-footer">
-            <p>
-              Logged in as: <strong>{username}</strong>
-            </p>
-            <button className="logout-button" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
         </aside>
 
         {/* Main Content (where nested routes are displayed) */}

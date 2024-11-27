@@ -1,6 +1,15 @@
+import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoMdClose } from "react-icons/io";
+import { MdLogout } from "react-icons/md";
 const Header = () => {
   const username = localStorage.getItem("username");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // Handle sidebar toggle
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   const handleLogout = () => {
     localStorage.removeItem("username");
     localStorage.removeItem("accessToken");
@@ -8,14 +17,29 @@ const Header = () => {
   };
 
   return (
-    <div
-      className="header"
-      style={{ backgroundImage: 'url("/assets/header.png")' }}
-    >
+    <div className="header">
       <h1>Inua Mkulima Subsidy Program</h1>
       <div className="header-right">
-        <span>Logged in as {username}</span>
-        <button onClick={handleLogout}>Logout</button>
+        <p className="header-username">
+          Logged in as:{" "}
+          <strong>
+            <span className="username">{username}</span>
+          </strong>
+        </p>
+        <button className="logout-button" onClick={handleLogout}>
+          <span>
+            <MdLogout size={24} />
+          </span>
+          Logout
+        </button>
+      </div>
+      {/* Hamburger Menu Button (Right side of the header) */}
+      <div className="hamburger-menu" onClick={toggleSidebar}>
+        {isSidebarOpen ? (
+          <IoMdClose size={30} color="white" />
+        ) : (
+          <GiHamburgerMenu size={30} color="white" />
+        )}
       </div>
     </div>
   );

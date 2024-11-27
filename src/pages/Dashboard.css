@@ -1,11 +1,4 @@
 /* General body styles */
-body,
-html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  height: 100%;
-}
 
 /* Dashboard Container */
 .dashboard-container {
@@ -14,48 +7,14 @@ html {
   height: 100vh; /* Ensures the layout takes full viewport height */
 }
 
-/* Header with background image */
-.header {
-  background-image: url("/public//assets/header.png"); /* Path to your background image */
-  background-size: cover;
-  background-position: center;
-  padding: 50px 20px; /* Adjust padding based on the background */
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px; /* Optional: max width for large screens */
-  align-items: center;
-}
-
-.header-left h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
 .header-right {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .header-right p {
   margin-right: 20px;
-}
-
-.logout-button {
-  background-color: #fff;
-  color: #4caf50;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 16px;
 }
 
 /* Main Content Container */
@@ -107,7 +66,7 @@ html {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
@@ -145,4 +104,4 @@ html {
   .content {
     padding: 10px;
   }
-}
+} */
