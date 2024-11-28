@@ -1,0 +1,169 @@
+.dashboard-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+}
+
+/* .product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 70%;
+} */
+
+.product-check {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+//* Product Header Container */
+.product-header {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center the items horizontally */
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-bottom: 2px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.product-header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 20px 0; /* Add bottom margin for spacing between title and buttons */
+}
+
+/* CTA (Call to Action) Section */
+.cta {
+  display: flex;
+  flex-direction: row; /* Stack the button and detail text vertically */
+  align-items: center;
+  justify-content: start;
+
+  gap: 10px; /* Spacing between the button and product detail text */
+}
+
+/* Back Button Styling */
+.btn-back {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #e8b40a; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #e8b40a; /* Darker blue on hover */
+}
+
+.btn-back svg {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Product Detail Text */
+.detail-prod {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.detail-prod:hover {
+  color: #e8b40a; /* Blue text color on hover */
+}
+
+.product-list {
+  /* padding: 20px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.price {
+  margin-right: 133px;
+}
+th {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100%; */
+}
+.product-table-wrapper {
+  background-color: #fff;
+  width: 456px;
+  height: 213px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Adds rounded corners to the table wrapper */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a floating effect */
+}
+
+.product-table {
+  width: 100%; /* Ensure it fits inside the wrapper */
+  height: 100%;
+  border-collapse: collapse;
+  overflow-y: auto; /* Allows scrolling for content that exceeds the height */
+  display: block; /* Make table scrollable */
+  margin-top: 20px;
+  border-radius: 12px; /* Adds rounded corners to the table itself */
+}
+
+.product-table th,
+.product-table td {
+  /* border: 1px solid #ddd; */
+  border: none;
+  padding: 12px;
+  text-align: center;
+}
+
+.product-table th {
+  background-color: #fff;
+}
+
+.product-table td {
+  background-color: #fff;
+}
+
+.product-table tr:hover {
+  background-color: #fff;
+}
+
+.cart {
+  width: 50%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cart button:disabled {
+  background-color: #ccc;
+}
+
+.cart .error {
+  color: red;
+}

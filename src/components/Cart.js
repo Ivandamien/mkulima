@@ -1,21 +1,123 @@
-const Cart = ({ selectedProducts, onRemoveFromCart }) => {
+// import React from "react";
+// import "./Cart.css";
+
+// const Cart = ({
+//   selectedProducts,
+//   removeFromCart,
+//   walletBalance,
+//   handleCheckout,
+// }) => {
+//   const totalAmount = selectedProducts.reduce(
+//     (total, product) => total + product.price,
+//     0
+//   );
+
+//   return (
+//     <div className="cart">
+//       <h2>Selected Products</h2>
+//       {selectedProducts.length === 0 ? (
+//         <p>No products selected</p>
+//       ) : (
+//         <ul>
+//           {selectedProducts.map((product) => (
+//             <li key={product.id}>
+//               {product.name} - {product.price} USD
+//               <button onClick={() => removeFromCart(product.id)}>Remove</button>
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+
+//       <div className="wallet">
+//         <p>Wallet Balance: {walletBalance} USD</p>
+//         <p>Total Deduction: {totalAmount} USD</p>
+//       </div>
+
+//       <button onClick={handleCheckout} disabled={walletBalance < 0}>
+//         Checkout
+//       </button>
+
+//       {walletBalance < 0 && <p className="error">Insufficient funds</p>}
+//     </div>
+//   );
+// };
+
+// export default Cart;
+// import React from "react";
+import "./Cart.css";
+
+const Cart = ({
+  selectedProducts,
+  onQuantityChange,
+  onDeductionChange,
+  removeFromCart,
+}) => {
+  const totalAmount = selectedProducts.reduce(
+    (total, product) =>
+      total + product.price * product.quantity - (product.deduction || 0),
+    0
+  );
+
   return (
-    <div className="cart">
-      <h2>Selected Products</h2>
-      {selectedProducts.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <ul>
+    <div className="cart-container">
+      <table className="cart-table">
+        {/* Table Header */}
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Price (USD)</th>
+            <th>Total</th>
+            <th>Deduction</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+
+        {/* Table Body */}
+        <tbody>
           {selectedProducts.map((product) => (
-            <li key={product.id}>
-              {product.name} - {product.price} USD
-              <button onClick={() => onRemoveFromCart(product.id)}>
-                Remove
-              </button>
-            </li>
+            <tr key={product.id}>
+              <td>{product.title}</td>
+              <td>
+                <input
+                  type="number"
+                  min="1"
+                  value={product.quantity}
+                  onChange={(e) =>
+                    onQuantityChange(product.id, parseInt(e.target.value, 10))
+                  }
+                />
+              </td>
+              <td>{product.price.toFixed(2)}</td>
+              <td>{(product.price * product.quantity).toFixed(2)}</td>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  value={product.deduction || 0}
+                  onChange={(e) =>
+                    onDeductionChange(product.id, parseInt(e.target.value, 10))
+                  }
+                />
+              </td>
+              <td>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeFromCart(product.id)}
+                >
+                  −
+                </button>
+              </td>
+            </tr>
           ))}
-        </ul>
-      )}
+        </tbody>
+      </table>
+
+      <div className="total-section">
+        <p>
+          Total: <strong>{totalAmount.toFixed(2)} USD</strong>
+        </p>
+      </div>
     </div>
   );
 };
