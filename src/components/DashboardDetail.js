@@ -479,7 +479,7 @@ const DashboardDetail = () => {
 
     let yPosition = tableStartY + 10;
     selectedProducts.forEach((product) => {
-      const productName = product.name || "N/A";
+      const productName = product.title || "N/A";
       const productQty = product.quantity || 0;
       const productPrice = product.price || 0;
       const productTotal = (productPrice * productQty).toFixed(2);
