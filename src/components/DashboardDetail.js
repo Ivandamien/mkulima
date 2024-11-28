@@ -7,9 +7,10 @@ import "./DashboardDetail.css";
 import { FaChevronLeft } from "react-icons/fa6";
 
 const DashboardDetail = () => {
+  const initialWalletBalance = 5000; // Initial wallet balance
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [walletBalance, setWalletBalance] = useState(1000); // Assuming a sample initial wallet balance
+  const [walletBalance, setWalletBalance] = useState(initialWalletBalance);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,24 +28,69 @@ const DashboardDetail = () => {
       });
   }, []);
 
+  // Update wallet balance dynamically when selectedProducts changes
+  useEffect(() => {
+    updateWalletBalance(selectedProducts);
+  }, [selectedProducts]);
+
   const addToCart = (product) => {
-    setSelectedProducts((prevProducts) => [...prevProducts, product]);
-    setWalletBalance(walletBalance - product.price); // Deduct price from wallet balance
+    setSelectedProducts((prevProducts) => {
+      const existingProduct = prevProducts.find((p) => p.id === product.id);
+      if (existingProduct) return prevProducts; // Prevent duplicates
+
+      return [
+        ...prevProducts,
+        { ...product, quantity: 1, deduction: 0 }, // Add with default quantity 1 and no deduction
+      ];
+    });
   };
 
-  const removeFromCart = (productId) => {
-    setSelectedProducts(
-      selectedProducts.filter((product) => product.id !== productId)
+  const handleQuantityChange = (id, newQuantity) => {
+    setSelectedProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === id
+          ? { ...product, quantity: Math.max(1, newQuantity) } // Ensure quantity >= 1
+          : product
+      )
     );
-    const product = products.find((prod) => prod.id === productId);
-    setWalletBalance(walletBalance + product.price); // Add back to wallet balance
+  };
+
+  const handleDeductionChange = (id, newDeduction) => {
+    setSelectedProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === id
+          ? { ...product, deduction: Math.max(0, newDeduction) } // Ensure deduction >= 0
+          : product
+      )
+    );
+  };
+
+  const removeFromCart = (id) => {
+    setSelectedProducts((prevProducts) => {
+      const updatedProducts = prevProducts.filter(
+        (product) => product.id !== id
+      );
+      if (updatedProducts.length === 0) {
+        setWalletBalance(initialWalletBalance); // Reset to initial balance if all products are removed
+      }
+      return updatedProducts;
+    });
+  };
+
+  const updateWalletBalance = (products) => {
+    const totalDeduction = products.reduce(
+      (total, product) =>
+        total + product.price * product.quantity - (product.deduction || 0),
+      0
+    );
+    const updatedBalance = initialWalletBalance - totalDeduction;
+    setWalletBalance(updatedBalance > 0 ? updatedBalance : 0); // Ensure balance does not go negative
   };
 
   const handleCheckout = () => {
     if (walletBalance < 0) {
       setError("Insufficient funds.");
     } else {
-      // Proceed with API request for checkout
       axios
         .post("https://dummyjson.com/checkout", {
           selectedProducts: selectedProducts.map((product) => product.id),
@@ -57,21 +103,6 @@ const DashboardDetail = () => {
         .catch(() => alert("Checkout failed"));
     }
   };
-  const handleQuantityChange = (id, newQuantity) => {
-    setSelectedProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, quantity: newQuantity } : product
-      )
-    );
-  };
-
-  const handleDeductionChange = (id, newDeduction) => {
-    setSelectedProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, deduction: newDeduction } : product
-      )
-    );
-  };
 
   if (loading) return <LoadingSpinner />;
   if (error) return <div>{error}</div>;
@@ -81,7 +112,7 @@ const DashboardDetail = () => {
       <div className="product-header">
         <h1>Product List</h1>
         <div className="cta">
-          <button className="btn-back " onClick={handleCheckout}>
+          <button className="btn-back" onClick={handleCheckout}>
             <FaChevronLeft />
             Back
           </button>
@@ -90,9 +121,9 @@ const DashboardDetail = () => {
           </div>
         </div>
         <div>
-          <p className="">
+          <p>
             <strong>Inua Mkulima Wallet</strong> Balance{" "}
-            <strong>${walletBalance}</strong>
+            <strong>${walletBalance.toFixed(2)}</strong>
           </p>
         </div>
       </div>
@@ -108,9 +139,8 @@ const DashboardDetail = () => {
                 <table className="product-table">
                   <thead>
                     <tr>
-                      <th className="th">
-                        Product <span className="price">Price</span>{" "}
-                      </th>
+                      <th>Product</th>
+                      <th>Price</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -122,6 +152,7 @@ const DashboardDetail = () => {
                             addToCart={addToCart}
                           />
                         </td>
+                        <td>{product.price}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -131,12 +162,10 @@ const DashboardDetail = () => {
           </div>
         </div>
         <div>
-          <h3>Select Product</h3>
+          <h3>Selected Products</h3>
           <Cart
             selectedProducts={selectedProducts}
             removeFromCart={removeFromCart}
-            // walletBalance={walletBalance}
-            // handleCheckout={handleCheckout}
             onQuantityChange={handleQuantityChange}
             onDeductionChange={handleDeductionChange}
           />
