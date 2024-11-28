@@ -576,9 +576,10 @@ const DashboardDetail = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
           marginTop: "20px",
+          gap: "65px",
         }}
       >
         <button
@@ -605,7 +606,10 @@ const DashboardDetail = () => {
               selectedProducts.length === 0 ? "#3E3E3E99" : "#000",
             color: "#fff",
             padding: "10px 20px",
-            border: "none",
+            border:
+              selectedProducts.length === 0
+                ? "2px solid #3e3e3e99"
+                : "2px solid #000",
             borderRadius: "5px",
             cursor: selectedProducts.length === 0 ? "not-allowed" : "pointer",
           }}

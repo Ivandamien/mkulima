@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 /* .product-header {
@@ -96,7 +97,7 @@
   width: 456px;
   height: 213px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  border: 1px solid #000;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
