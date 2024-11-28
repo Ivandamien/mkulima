@@ -17,14 +17,7 @@ const Sidebar = ({ isOpen, toggleSidebar, username }) => {
               Dashboard
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/reports"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
-              Report
-            </NavLink>
-          </li>
+
           <li>
             <NavLink
               to="/dashboard/transactions"
@@ -35,10 +28,10 @@ const Sidebar = ({ isOpen, toggleSidebar, username }) => {
           </li>
           <li>
             <NavLink
-              to="/help"
+              to="/dashboard/reports"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              Help
+              Reports
             </NavLink>
           </li>
         </ul>
