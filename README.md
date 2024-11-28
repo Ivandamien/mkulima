@@ -4,6 +4,22 @@
 
 ### 👉 [Here](https://mkulima.vercel.app/) [https://mkulima.vercel.app/](https://mkulima.vercel.app/)
 
+## This is the user available
+
+Use this credentials to signin
+
+```javascript
+
+{
+    username: 'emilys',
+    password: 'emilyspass',
+}
+
+
+
+
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -72,3 +88,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+
+```
