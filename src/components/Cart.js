@@ -88,8 +88,8 @@ const Cart = ({
                   }
                 />
               </td>
-              <td>{product.price.toFixed(2)}</td>
-              <td>{(product.price * product.quantity).toFixed(2)}</td>
+              <td>${product.price.toFixed(2)}</td>
+              <td>${(product.price * product.quantity).toFixed(2)}</td>
               <td>
                 <input
                   type="number"

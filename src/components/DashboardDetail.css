@@ -92,7 +92,7 @@
 .price {
   margin-right: 133px;
 }
-th {
+.th {
   display: flex;
   justify-content: space-between;
   align-items: center;

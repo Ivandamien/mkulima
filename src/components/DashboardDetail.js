@@ -108,7 +108,7 @@ const DashboardDetail = () => {
                 <table className="product-table">
                   <thead>
                     <tr>
-                      <th>
+                      <th className="th">
                         Product <span className="price">Price</span>{" "}
                       </th>
                     </tr>

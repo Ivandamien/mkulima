@@ -95,16 +95,20 @@
 }
 
 .cart-table th {
-  background-color: #f5f5f5;
+  background-color: #fff8e1;
   padding: 8px;
-  font-size: 8px;
+  font-size: 10px;
   /* border-bottom: 2px solid #ddd; */
+  border: none;
+  text-align: left;
 }
 
 .cart-table td {
   padding: 8px;
-  font-size: 13px;
-  border-bottom: 1px solid #ddd;
+  font-size: 10px;
+  /* border-bottom: 1px solid #ddd; */
+  border: none;
+  text-align: left;
 }
 
 .cart-table input {
