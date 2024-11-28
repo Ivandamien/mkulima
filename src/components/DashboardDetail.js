@@ -4,15 +4,19 @@ import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { FaChevronLeft } from "react-icons/fa6";
+import PaymentModal from "../components/PaymentModal"; // Import the modal component
 import "./DashboardDetail.css";
 
 const DashboardDetail = () => {
-  const initialWalletBalance = 5000; // Initial wallet balance
+  const initialWalletBalance = 5000;
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [walletBalance, setWalletBalance] = useState(initialWalletBalance);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility state
+  const [customerName] = useState("Gladys Kivua");
+  const [customerId] = useState("123455");
 
   useEffect(() => {
     fetchProducts();
@@ -33,7 +37,6 @@ const DashboardDetail = () => {
   };
 
   const resetState = () => {
-    // Reset everything to the initial state
     setProducts([]);
     setSelectedProducts([]);
     setWalletBalance(initialWalletBalance);
@@ -92,18 +95,38 @@ const DashboardDetail = () => {
     );
   };
 
+  //   const handleCheckout = () => {
+  //     if (walletBalance < 0) {
+  //       setError("Insufficient funds.");
+  //     } else {
+  //       axios
+  //         .post("https://dummyjson.com/checkout", {
+  //           selectedProducts: selectedProducts.map((product) => product.id),
+  //           total: calculateTotalDeduction(),
+  //         })
+  //         .then(() => {
+  //           setIsModalVisible(true); // Show the modal on successful checkout
+  //         })
+  //         .catch(() => alert("Checkout failed"));
+  //     }
+  //   };
+
   const handleCheckout = () => {
-    if (walletBalance < 0) {
-      setError("Insufficient funds.");
+    const totalDeduction = calculateTotalDeduction();
+    if (totalDeduction <= walletBalance) {
+      setIsModalVisible(true); // Open the modal if the deduction is <= wallet balance
     } else {
-      axios
-        .post("https://dummyjson.com/checkout", {
-          selectedProducts: selectedProducts.map((product) => product.id),
-          total: calculateTotalDeduction(),
-        })
-        .then(() => alert("Checkout successful"))
-        .catch(() => alert("Checkout failed"));
+      setError("Insufficient funds.");
     }
+  };
+
+  const handleModalDone = () => {
+    setIsModalVisible(false); // Hide the modal
+    resetState(); // Reset the state to initial values after checkout
+  };
+
+  const handleDownloadReceipt = () => {
+    alert("Download receipt functionality not implemented");
   };
 
   if (loading) return <LoadingSpinner />;
@@ -228,6 +251,16 @@ const DashboardDetail = () => {
           purchase, ensure you get the balance from the customer.
         </p>
       )}
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isVisible={isModalVisible}
+        totalDeduction={calculateTotalDeduction()}
+        onDownload={handleDownloadReceipt}
+        onDone={handleModalDone}
+        customerName={customerName}
+        customerId={customerId}
+      />
     </div>
   );
 };

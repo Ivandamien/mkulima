@@ -1,0 +1,133 @@
+/* Overlay for modal background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the modal appears above other content */
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 550px; /* Limit max width */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal header with icon and title */
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Icon styling */
+.modal-icon {
+  color: black;
+}
+
+/* Modal body text */
+.modal-body {
+  margin-bottom: 30px;
+}
+
+.modal-reference,
+.modal-date,
+.modal-amount,
+.modal-description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.modal-amount {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Footer buttons container */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Button styles */
+.modal-footer button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+
+  cursor: pointer;
+  width: 48%; /* Buttons take up 48% of the width for equal spacing */
+  transition: all 0.3s ease;
+}
+
+/* Download button styles */
+.btn-download {
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  border: 2px solid black; /* Black border */
+}
+
+.btn-download:hover {
+  background-color: black; /* Change background to black on hover */
+  color: white; /* Change text color to white on hover */
+  border-color: black; /* Ensure the border remains black on hover */
+}
+
+/* Done button styles */
+.btn-done {
+  background-color: #000; /* Red */
+  color: white;
+}
+
+.btn-done:hover {
+  background-color: #000;
+}
+
+/* Animations for smooth appearance */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Make modal responsive */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-footer button {
+    width: 100%;
+  }
+}
