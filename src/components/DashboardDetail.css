@@ -3,15 +3,7 @@
   justify-content: space-between;
   padding: 20px;
   flex-direction: column;
-  /* flex-wrap: wrap; */
 }
-
-/* .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  width: 70%;
-} */
 
 .product-check {
   display: flex;
@@ -19,11 +11,11 @@
   align-items: center;
   margin-bottom: 20px;
 }
-//* Product Header Container */
+
 .product-header {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center the items horizontally */
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   background-color: #f8f8f8;
   border-bottom: 2px solid #ddd;
@@ -35,17 +27,16 @@
   font-size: 1.8rem;
   font-weight: bold;
   color: #333;
-  margin: 0 0 20px 0; /* Add bottom margin for spacing between title and buttons */
+  margin: 0 0 20px 0;
 }
 
-/* CTA (Call to Action) Section */
-.cta {
+/ .cta {
   display: flex;
-  flex-direction: row; /* Stack the button and detail text vertically */
+  flex-direction: row;
   align-items: center;
   justify-content: start;
 
-  gap: 10px; /* Spacing between the button and product detail text */
+  gap: 10px;
 }
 
 /* Back Button Styling */
@@ -53,7 +44,7 @@
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  background-color: #e8b40a; /* Blue background */
+  background-color: #e8b40a;
   color: white;
   border: none;
   border-radius: 4px;
@@ -63,11 +54,11 @@
 }
 
 .btn-back:hover {
-  background-color: #e8b40a; /* Darker blue on hover */
+  background-color: #e8b40a;
 }
 
 .btn-back svg {
-  margin-right: 8px; /* Space between icon and text */
+  margin-right: 8px;
 }
 
 /* Product Detail Text */
@@ -80,11 +71,10 @@
 }
 
 .detail-prod:hover {
-  color: #e8b40a; /* Blue text color on hover */
+  color: #e8b40a;
 }
 
 .product-list {
-  /* padding: 20px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,7 +86,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 100%; */
 }
 .product-table-wrapper {
   background-color: #fff;
@@ -104,23 +93,22 @@
   height: 213px;
   overflow-y: auto;
   border: 1px solid #ddd;
-  border-radius: 12px; /* Adds rounded corners to the table wrapper */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a floating effect */
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .product-table {
-  width: 100%; /* Ensure it fits inside the wrapper */
+  width: 100%;
   height: 100%;
   border-collapse: collapse;
-  overflow-y: auto; /* Allows scrolling for content that exceeds the height */
-  display: block; /* Make table scrollable */
+  overflow-y: auto;
+  display: block;
   margin-top: 20px;
-  border-radius: 12px; /* Adds rounded corners to the table itself */
+  border-radius: 12px;
 }
 
 .product-table th,
 .product-table td {
-  /* border: 1px solid #ddd; */
   border: none;
   padding: 12px;
   text-align: center;

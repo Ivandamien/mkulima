@@ -101,7 +101,7 @@
   background-position: center;
   top: 0;
   z-index: 1000;
-  /* position: fixed; */
+  
 }
 
 .header h1 {
@@ -171,10 +171,7 @@
     display: block; /* Show hamburger icon on mobile */
   }
 
-  .header {
-    /* flex-direction: column; */
-    /* text-align: center; */
-  }
+  
 
   .header-right {
     display: none; /* Hide the username and logout button on mobile */
