@@ -232,7 +232,6 @@ const DashboardDetail = () => {
                             addToCart={addToCart}
                           />
                         </td>
-                        <td>{product.price}</td>
                       </tr>
                     ))}
                   </tbody>

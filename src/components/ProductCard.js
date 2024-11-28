@@ -12,7 +12,7 @@ const ProductCard = ({ product, addToCart }) => {
       </div>
       <div className="add-to-cart">
         <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
-          <CiCirclePlus size={15} />
+          <CiCirclePlus size={20} />
         </button>
       </div>
     </div>
