@@ -7,6 +7,7 @@ import { FaChevronLeft } from "react-icons/fa6";
 import PaymentModal from "../components/PaymentModal"; // Import the modal component
 import { jsPDF } from "jspdf";
 import "./DashboardDetail.css";
+import ErrorModal from "./ErrorModal";
 
 const DashboardDetail = () => {
   const initialWalletBalance = 5000;
@@ -15,6 +16,8 @@ const DashboardDetail = () => {
   const [walletBalance, setWalletBalance] = useState(initialWalletBalance);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [customerName] = useState("Gladys Kivua");
   const [customerId] = useState("123455");
@@ -107,12 +110,19 @@ const DashboardDetail = () => {
     handleWalletBalanceUpdate();
   }, [handleWalletBalanceUpdate]); // Trigger when handleWalletBalanceUpdate changes
 
+  const handleErrorModalClose = () => {
+    setIsErrorModalVisible(false); // Close the error modal
+    setError(null); // Reset error message
+  };
+
   const handleCheckout = () => {
     const totalDeduction = calculateTotalDeduction();
     if (totalDeduction <= walletBalance) {
       setIsModalVisible(true); // Open the modal if the deduction is <= wallet balance
     } else {
-      setError("Insufficient funds.");
+      // setError("Insufficient funds.");
+      setErrorMessage("Insufficient funds.");
+      setIsErrorModalVisible(true);
     }
   };
 
@@ -303,6 +313,14 @@ const DashboardDetail = () => {
           subsidy program. If this does not cover the total cost of the
           purchase, ensure you get the balance from the customer.
         </p>
+      )}
+
+      {/* Error Modal for Insufficient Funds */}
+      {isErrorModalVisible && (
+        <ErrorModal
+          message={errorMessage} // Dynamically pass the error message here
+          onClose={handleErrorModalClose} // Close modal when user clicks "Close"
+        />
       )}
 
       {/* Payment Modal */}
