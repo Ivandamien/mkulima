@@ -1,30 +1,30 @@
-/* Overlay for modal background */
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
+  background: rgba(0, 0, 0, 0.6); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Ensure the modal appears above other content */
+  z-index: 9999; 
 }
 
-/* Modal content box */
+
 .modal-content {
   background-color: #fff;
   padding: 30px;
   border-radius: 15px;
   width: 100%;
-  max-width: 550px; /* Limit max width */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 550px; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
   text-align: center;
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Modal header with icon and title */
+
 .modal-header {
   display: flex;
   flex-direction: column;
@@ -39,12 +39,12 @@
   font-weight: bold;
 }
 
-/* Icon styling */
+
 .modal-icon {
   color: black;
 }
 
-/* Modal body text */
+
 .modal-body {
   margin-bottom: 30px;
 }
@@ -63,40 +63,40 @@
   color: #333;
 }
 
-/* Footer buttons container */
+
 .modal-footer {
   display: flex;
   justify-content: space-between;
   gap: 15px;
 }
 
-/* Button styles */
+
 .modal-footer button {
   padding: 12px 20px;
   font-size: 1rem;
   border-radius: 8px;
 
   cursor: pointer;
-  width: 48%; /* Buttons take up 48% of the width for equal spacing */
+  width: 48%; 
   transition: all 0.3s ease;
 }
 
-/* Download button styles */
+
 .btn-download {
-  background-color: white; /* White background */
-  color: black; /* Black text */
-  border: 2px solid black; /* Black border */
+  background-color: white; 
+  color: black; 
+  border: 2px solid black; 
 }
 
 .btn-download:hover {
-  background-color: black; /* Change background to black on hover */
-  color: white; /* Change text color to white on hover */
-  border-color: black; /* Ensure the border remains black on hover */
+  background-color: black; 
+  color: white; 
+  border-color: black; 
 }
 
-/* Done button styles */
+
 .btn-done {
-  background-color: #000; /* Red */
+  background-color: #000; 
   color: white;
 }
 
@@ -104,7 +104,7 @@
   background-color: #000;
 }
 
-/* Animations for smooth appearance */
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -116,7 +116,7 @@
   }
 }
 
-/* Make modal responsive */
+
 @media (max-width: 600px) {
   .modal-content {
     width: 90%;
