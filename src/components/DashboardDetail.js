@@ -3,8 +3,8 @@ import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import Cart from "../components/Cart";
 import LoadingSpinner from "../components/LoadingSpinner";
-import "./DashboardDetail.css";
 import { FaChevronLeft } from "react-icons/fa6";
+import "./DashboardDetail.css";
 
 const DashboardDetail = () => {
   const initialWalletBalance = 5000; // Initial wallet balance
@@ -15,7 +15,11 @@ const DashboardDetail = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetching products from the API
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = () => {
+    setLoading(true);
     axios
       .get("https://dummyjson.com/products")
       .then((response) => {
@@ -26,12 +30,15 @@ const DashboardDetail = () => {
         setError("Error loading products.");
         setLoading(false);
       });
-  }, []);
+  };
 
-  // Update wallet balance dynamically when selectedProducts changes
-  useEffect(() => {
-    updateWalletBalance(selectedProducts);
-  }, [selectedProducts]);
+  const resetState = () => {
+    // Reset everything to the initial state
+    setProducts([]);
+    setSelectedProducts([]);
+    setWalletBalance(initialWalletBalance);
+    fetchProducts(); // Re-fetch the products to reset
+  };
 
   const addToCart = (product) => {
     setSelectedProducts((prevProducts) => {
@@ -77,14 +84,12 @@ const DashboardDetail = () => {
     });
   };
 
-  const updateWalletBalance = (products) => {
-    const totalDeduction = products.reduce(
+  const calculateTotalDeduction = () => {
+    return selectedProducts.reduce(
       (total, product) =>
         total + product.price * product.quantity - (product.deduction || 0),
       0
     );
-    const updatedBalance = initialWalletBalance - totalDeduction;
-    setWalletBalance(updatedBalance > 0 ? updatedBalance : 0); // Ensure balance does not go negative
   };
 
   const handleCheckout = () => {
@@ -94,10 +99,7 @@ const DashboardDetail = () => {
       axios
         .post("https://dummyjson.com/checkout", {
           selectedProducts: selectedProducts.map((product) => product.id),
-          total: selectedProducts.reduce(
-            (total, product) => total + product.price,
-            0
-          ),
+          total: calculateTotalDeduction(),
         })
         .then(() => alert("Checkout successful"))
         .catch(() => alert("Checkout failed"));
@@ -112,13 +114,9 @@ const DashboardDetail = () => {
       <div className="product-header">
         <h1>Product List</h1>
         <div className="cta">
-          <button className="btn-back" onClick={handleCheckout}>
-            <FaChevronLeft />
-            Back
+          <button className="btn-back" onClick={resetState}>
+            <FaChevronLeft style={{ marginRight: "8px" }} /> Back
           </button>
-          <div className="par">
-            <p className="detail-prod">Product Detail</p>
-          </div>
         </div>
         <div>
           <p>
@@ -171,6 +169,65 @@ const DashboardDetail = () => {
           />
         </div>
       </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "20px",
+        }}
+      >
+        <button
+          className="btn-back"
+          onClick={resetState}
+          style={{
+            backgroundColor: "#fff",
+            border: "2px solid #000",
+            color: "#000",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          <FaChevronLeft style={{ marginRight: "8px" }} /> Back
+        </button>
+
+        <button
+          className="btn-checkout"
+          onClick={handleCheckout}
+          disabled={selectedProducts.length === 0}
+          style={{
+            backgroundColor:
+              selectedProducts.length === 0 ? "#3E3E3E99" : "#000",
+            color: "#fff",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: selectedProducts.length === 0 ? "not-allowed" : "pointer",
+          }}
+        >
+          Deduct{" "}
+          {selectedProducts.length === 0
+            ? "0.00"
+            : calculateTotalDeduction().toFixed(2)}{" "}
+          USD
+        </button>
+      </div>
+
+      {calculateTotalDeduction() > 0 && (
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "15px",
+            color: "red",
+            fontWeight: "bold",
+          }}
+        >
+          You will receive {calculateTotalDeduction().toFixed(2)} USD from the
+          subsidy program. If this does not cover the total cost of the
+          purchase, ensure you get the balance from the customer.
+        </p>
+      )}
     </div>
   );
 };
