@@ -1,5 +1,9 @@
 # This project is a submission for Inua Mkulima Subsidy Technical Assignment
 
+## The Project has been completed and you can view the deployed site
+
+### 👉 [Here](https://mkulima.vercel.app/) [https://mkulima.vercel.app/](https://mkulima.vercel.app/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
