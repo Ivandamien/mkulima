@@ -126,7 +126,10 @@ const Cart = ({
           </table>
           <div className="total-section">
             <p>
-              Total Deduction: <strong>{totalDeduction.toFixed(2)} USD</strong>
+              Total Deduction:{" "}
+              <strong>
+                <span className="deduct">{totalDeduction.toFixed(2)} USD</span>
+              </strong>
             </p>
           </div>
         </>
