@@ -1,4 +1,4 @@
-# This project is a submission for Inua Mkulima Subsidy Technical Assignment
+# This project is an mvp for Inua Mkulima Subsidy Programe
 
 ## The Project has been completed and you can view the deployed site
 
